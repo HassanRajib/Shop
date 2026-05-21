@@ -109,7 +109,9 @@ const products:ProductsType = [
 
 const ProductList = () => {
   return (
-    <div>ProductList</div>
+    <div className='w-full'>
+      
+    </div>
   )
 }
 

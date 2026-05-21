@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import React from 'react'
+import ProductList from './components/ProductList'
 
 const Homepage = () => {
   return (
@@ -7,6 +8,7 @@ const Homepage = () => {
       <div className='relative aspect-3/1 md-10'>
         <Image src="/fich.png" alt='big image' fill/>
       </div>
+      <ProductList/>
     </div>
   )
 }

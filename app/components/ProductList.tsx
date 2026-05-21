@@ -1,5 +1,7 @@
 import React from 'react'
 import { ProductsType } from '../types';
+import Catagories from './Catagories';
+import ProductCard from './ProductCard';
 
 // TEMPORARY
 const products:ProductsType = [
@@ -110,7 +112,12 @@ const products:ProductsType = [
 const ProductList = () => {
   return (
     <div className='w-full'>
-      
+      <Catagories/>
+      <div className='grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-12'>
+        {products.map((product) => (
+          <ProductCard key={product.id} product={product}/>
+        ))}
+      </div>
     </div>
   )
 }

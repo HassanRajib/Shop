@@ -47,7 +47,7 @@ const ProductCard = ({ product }: { product: ProductType }) => {
         {/* price */}
         <div className="flex items-center justify-between">
               <p className="font-medium">${product.price.toFixed(2)}</p>
-              <button className="ring-1 ring-gray-300 shadow-lg rounded-md px">Add to cart</button>
+              <button className="ring-1 ring-gray-300 shadow-lg rounded-md px-2 py-1.5 text-sm cursor-pointer hover:text-green-700 hover:bg-amber-400">Add to cart</button>
         </div>
       </div>
     </div>

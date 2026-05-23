@@ -2,6 +2,7 @@ import React from 'react'
 import { ProductsType } from '../types';
 import Catagories from './Catagories';
 import ProductCard from './ProductCard';
+import Link from 'next/link';
 
 // TEMPORARY
 const products:ProductsType = [
@@ -109,7 +110,7 @@ const products:ProductsType = [
   },
 ];
 
-const ProductList = () => {
+const ProductList = ({catagory}: {catagory: string}) => {
   return (
     <div className='w-full'>
       <Catagories/>
@@ -118,6 +119,10 @@ const ProductList = () => {
           <ProductCard key={product.id} product={product}/>
         ))}
       </div>
+      <Link href={catagory ? `/products/?catagory=${catagory}` : "/products"}
+      className='flex justify-end mt-4 underline text-sm text-gray-500'>
+        view all product
+    </Link>
     </div>
   )
 }

@@ -9,7 +9,7 @@ const ProductPage = async ({
   const catagory = (await searchParams).catagory
   return (
     <div>
-        <ProductList catagory={catagory}/>
+        <ProductList catagory={catagory} params='products'/>
     </div>
   )
 }

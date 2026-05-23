@@ -13,7 +13,7 @@ const Homepage = async ({
       <div className="relative aspect-3/1 md-10">
         <Image src="/fich.png" alt="big image" fill />
       </div>
-      <ProductList catagory={catagory} />
+      <ProductList catagory={catagory} params="homepage" />
     </div>
   );
 };

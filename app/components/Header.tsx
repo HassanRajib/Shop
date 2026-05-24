@@ -2,7 +2,8 @@ import Link from 'next/link'
 import React from 'react'
 import SearchBar from './SearchBar'
 import { GoBell } from 'react-icons/go'
-import { BsCart } from 'react-icons/bs'
+// import { BsCart } from 'react-icons/bs'
+import ShoppingCartIcon from './ShoppingCartIcon'
 
 const Header = () => {
   return (
@@ -18,7 +19,7 @@ const Header = () => {
         <div className='flex items-center gap-5'>
             <SearchBar/>
             <GoBell className='w-4 h-4 text-gray-600'/>
-            <BsCart className='w-4 h-4 text-gray-600'/>
+            <ShoppingCartIcon />
             <Link href='/login'>
             Sign in
             </Link>

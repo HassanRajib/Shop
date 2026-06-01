@@ -1,7 +1,12 @@
 "use client";
-import React from "react";
+
+import React, { useState } from "react";
 import { CartItemsType } from "../types";
 import { useRouter, useSearchParams } from "next/navigation";
+import { FaArrowRight, FaTrash } from "react-icons/fa";
+import ShippingForm from "../components/ShippingForm";
+import PaymentForm from "../components/PaymentForm";
+import Image from "next/image";
 
 const steps = [
   {
@@ -77,6 +82,7 @@ const cartItems: CartItemsType = [
 const CartPage = () => {
   const searchParams = useSearchParams();
   const router = useRouter();
+  const [shippingForm, setShippingForm] = useState(null);
 
   const activeStep = parseInt(searchParams.get("step") || "1");
   return (
@@ -85,20 +91,93 @@ const CartPage = () => {
       <div className="flex flex-col lg:flex-row items-center gap-8 lg:gap-16">
         {steps.map((step) => (
           <div
-            className={`flex items-center gap-2 border-b-2 pb-2 ${step.id === activeStep ? "border-gray-700": "border-gray-400"}`}
+            className={`flex items-center gap-2 border-b-2 pb-2 ${step.id === activeStep ? "border-gray-700" : "border-gray-400"}`}
             key={step.id}
           >
-            <div className={`w-6 h-6 rounded-full text-white p-4 flex items-center justify-center ${step.id===activeStep ? "bg-gray-700" : "bg-gray-400"}`}>{step.id}</div>
-            <p className={`text-sm font-medium ${step.id === activeStep ? "text-gray-700": "text-gray-400"}`}>{step.title}</p>
+            <div
+              className={`w-6 h-6 rounded-full text-white p-4 flex items-center justify-center ${step.id === activeStep ? "bg-gray-700" : "bg-gray-400"}`}
+            >
+              {step.id}
+            </div>
+            <p
+              className={`text-sm font-medium ${step.id === activeStep ? "text-gray-700" : "text-gray-400"}`}
+            >
+              {step.title}
+            </p>
           </div>
         ))}
       </div>
       {/* all details */}
       <div className="w-full flex flex-col lg:flex-row gap-16">
         {/* steps */}
-        <div className="w-full lg:w-7/12 shadow-lg border border-gray-100 p-8 rounded-md flex flex-col gap-8">1</div>
+        <div className="w-full lg:w-7/12 shadow-lg border border-gray-100 p-8 rounded-md flex flex-col gap-8">
+          {activeStep === 1 ? (
+            cartItems.map(item=>(
+              <div className="flex items-center justify-between" key={item.id}>
+                {/* img and detail */}
+                <div className="flex gap-8">
+                  <div className="">
+                    <Image src={item.images[item.selectedColor]} alt={item.name} fill className="object-contain"/>
+                  </div>
+                </div>
+                {/* delete */}
+                <button className="w-8 h-8 rounded-full hover:bg-red-300 transition-all duration-200 bg-red-100 text-red-500 flex items-center justify-center cursor-pointer">
+                  <FaTrash className="w-4 h-4"/>
+                </button>
+              </div>
+            ))
+          ) : activeStep === 2 ? (
+            <ShippingForm />
+          ) : activeStep === 3 && shippingForm ? (
+            <PaymentForm />
+          ) : (
+            <p className="text-sm text-gray-500">Please fill the shipping form</p>
+          )}
+        </div>
         {/* details */}
-        <div className="w-full lg:w-5/12 shadow-lg border border-gray-100 p-8 rounded-md flex flex-col gap-8">2</div>
+        <div className="w-full lg:w-5/12 shadow-lg border border-gray-100 p-8 rounded-md flex flex-col gap-8">
+          <h2 className="font-semibold">Cart Details</h2>
+          <div className="flex flex-col gap-4">
+            <div className="flex justify-between text-sm">
+              <p className="text-gray-500">Subtotal</p>
+              <p className="font-medium">
+                $
+                {cartItems
+                  .reduce((acc, item) => acc + item.price * item.quantity, 0)
+                  .toFixed(2)}
+              </p>
+            </div>
+            {/* 2 */}
+            <div className="flex justify-between text-sm">
+              <p className="text-gray-500">discount</p>
+              <p className="font-medium">$ 10</p>
+            </div>
+            {/* 3 */}
+            <div className="flex justify-between text-sm">
+              <p className="text-gray-500">Shipping Fee</p>
+              <p className="font-medium">$80</p>
+            </div>
+            <hr />
+            <div className="flex justify-between">
+              <p className="text-gray-800 font-semibold">Total</p>
+              <p className="font-medium">
+                $
+                {cartItems
+                  .reduce((acc, item) => acc + item.price * item.quantity, 0)
+                  .toFixed(2)}
+              </p>
+            </div>
+          </div>
+          {activeStep === 1 && (
+            <button
+              onClick={() => router.push("/cart?step=2", { scroll: false })}
+              className="w-full bg-gray-800 hover:bg-gray-900 transition-all duration-300 text-white p-2 rounded-lg cursor-pointer flex items-center justify-center gap-3"
+            >
+              Continue
+              <FaArrowRight className="w-[15px] h-[15px]" />
+            </button>
+          )}
+        </div>
       </div>
     </div>
   );

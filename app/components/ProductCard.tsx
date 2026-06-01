@@ -24,7 +24,7 @@ const ProductCard = ({ product }: { product: ProductType }) => {
       <Link href={`/product/${product.id}`}>
         <div className="relative aspect-2/3">
           <Image
-            src={product.images[product.colors[0]]}
+            src={product.images[productTypes.color]}
             alt={product.name}
             fill
             className="object-cover hover:scale-105 transition-all duration-300"
@@ -79,7 +79,7 @@ const ProductCard = ({ product }: { product: ProductType }) => {
         <div className="flex items-center justify-between">
           <p className="font-medium">${product.price.toFixed(2)}</p>
           <button className="ring-1 ring-gray-300 shadow-lg rounded-md px-2 py-1.5 text-sm cursor-pointer hover:text-green-700 hover:bg-amber-400 flex items-center gap-1">
-            <BsCart className="w-4 h-4"/>
+            <BsCart className="w-4 h-4" />
             Add to cart
           </button>
         </div>

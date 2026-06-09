@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { CartItemsType } from "../types";
+import { CartItemsType, ShippingFormInputs } from "../types";
 import { useRouter, useSearchParams } from "next/navigation";
 import { FaArrowRight, FaTrash } from "react-icons/fa";
 import ShippingForm from "../components/ShippingForm";
@@ -78,7 +78,7 @@ const cartItems: CartItemsType = [
 const CartPage = () => {
   const searchParams = useSearchParams();
   const router = useRouter();
-  const [shippingForm, setShippingForm] = useState(null);
+  const [shippingForm, setShippingForm] = useState<ShippingFormInputs>();
 
   const activeStep = parseInt(searchParams.get("step") || "1");
   return (
@@ -144,7 +144,7 @@ const CartPage = () => {
               </div>
             ))
           ) : activeStep === 2 ? (
-            <ShippingForm />
+            <ShippingForm setShippingForm={setShippingForm}/>
           ) : activeStep === 3 && shippingForm ? (
             <PaymentForm />
           ) : (

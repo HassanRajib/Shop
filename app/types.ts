@@ -1,4 +1,4 @@
-import {z} from "zod";
+import { z } from "zod";
 
 export type ProductType = {
   id: string | number;
@@ -11,8 +11,7 @@ export type ProductType = {
   images: Record<string, string>;
 };
 
-
-export type ProductsType = ProductType[]
+export type ProductsType = ProductType[];
 
 export type CartItemType = ProductType & {
   quantity: number;
@@ -20,11 +19,16 @@ export type CartItemType = ProductType & {
   selectedColor: string;
 };
 
-export type CartItemsType = CartItemType[]
+export type CartItemsType = CartItemType[];
 
 export const shippingFormSchema = z.object({
-  name:z.string().min(1,"name is requer"),
-  email:z.email().min(1,"email is requer"),
-  phone:z.string().min(11,"phone no must be 11 digit").regex(/^\d+$/, "Phone number must be only number"),
-  addres:z.string().min(1, "address is required" )
-})
+  name: z.string().min(1, "name is requer"),
+  email: z.email().min(1, "email is requer"),
+  phone: z
+    .string()
+    .min(11, "phone no must be 11 digit")
+    .regex(/^\d+$/, "Phone number must be only number"),
+  addres: z.string().min(1, "address is required"),
+});
+
+export type ShippingFormInputs = z.infer<typeof shippingFormSchema>;

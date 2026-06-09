@@ -35,9 +35,7 @@ const cartItems: CartItemsType = [
     sizes: ["s", "m", "l", "xl", "xxl"],
     colors: ["gray", "purple", "green"],
     images: {
-      gray: "/products/1g.png",
-      purple: "/products/1p.png",
-      green: "/products/1gr.png",
+      gray: "/products/1.jpeg",
     },
     quantity: 1,
     selectedSize: "m",
@@ -53,7 +51,7 @@ const cartItems: CartItemsType = [
     price: 59.9,
     sizes: ["s", "m", "l", "xl"],
     colors: ["gray", "green"],
-    images: { gray: "/products/2g.png", green: "/products/2gr.png" },
+    images: { gray: "/products/2.jpeg" },
     quantity: 1,
     selectedSize: "l",
     selectedColor: "gray",
@@ -69,13 +67,11 @@ const cartItems: CartItemsType = [
     sizes: ["s", "m", "l"],
     colors: ["green", "blue", "black"],
     images: {
-      green: "/products/3gr.png",
-      blue: "/products/3b.png",
-      black: "/products/3bl.png",
+      green: "/products/3.jpeg"
     },
     quantity: 1,
     selectedSize: "l",
-    selectedColor: "black",
+    selectedColor: "green",
   },
 ];
 
@@ -112,17 +108,38 @@ const CartPage = () => {
         {/* steps */}
         <div className="w-full lg:w-7/12 shadow-lg border border-gray-100 p-8 rounded-md flex flex-col gap-8">
           {activeStep === 1 ? (
-            cartItems.map(item=>(
+            cartItems.map((item) => (
               <div className="flex items-center justify-between" key={item.id}>
                 {/* img and detail */}
                 <div className="flex gap-8">
-                  <div className="">
-                    <Image src={item.images[item.selectedColor]} alt={item.name} fill className="object-contain"/>
+                  <div className="relative w-32 h-32">
+                    <Image
+                      src={item.images[item.selectedColor]}
+                      alt={item.name}
+                      fill
+                      className="object-contain"
+                    />
+                  </div>
+                  {/* details */}
+                  <div className="flex flex-col justify-between">
+                    <div className="flex flex-col gap-1">
+                      <p className="text-sm font-medium">{item.name}</p>
+                      <p className="text-xs text-gray-600">
+                        Quantity: {item.quantity}
+                      </p>
+                      <p className="text-xs text-gray-600">
+                        Size: {item.selectedSize}
+                      </p>
+                      <p className="text-xs text-gray-600">
+                        Color: {item.selectedColor}
+                      </p>
+                    </div>
+                    <p className="font-medium">${item.price.toFixed(2)}</p>
                   </div>
                 </div>
                 {/* delete */}
                 <button className="w-8 h-8 rounded-full hover:bg-red-300 transition-all duration-200 bg-red-100 text-red-500 flex items-center justify-center cursor-pointer">
-                  <FaTrash className="w-4 h-4"/>
+                  <FaTrash className="w-4 h-4" />
                 </button>
               </div>
             ))
@@ -131,11 +148,13 @@ const CartPage = () => {
           ) : activeStep === 3 && shippingForm ? (
             <PaymentForm />
           ) : (
-            <p className="text-sm text-gray-500">Please fill the shipping form</p>
+            <p className="text-sm text-gray-500">
+              Please fill the shipping form
+            </p>
           )}
         </div>
         {/* details */}
-        <div className="w-full lg:w-5/12 shadow-lg border border-gray-100 p-8 rounded-md flex flex-col gap-8">
+        <div className="w-full lg:w-5/12 shadow-lg border border-gray-100 p-8 rounded-md flex flex-col gap-8 h-max">
           <h2 className="font-semibold">Cart Details</h2>
           <div className="flex flex-col gap-4">
             <div className="flex justify-between text-sm">
@@ -174,7 +193,7 @@ const CartPage = () => {
               className="w-full bg-gray-800 hover:bg-gray-900 transition-all duration-300 text-white p-2 rounded-lg cursor-pointer flex items-center justify-center gap-3"
             >
               Continue
-              <FaArrowRight className="w-[15px] h-[15px]" />
+              <FaArrowRight className="w-15px h-15px" />
             </button>
           )}
         </div>

@@ -142,7 +142,7 @@ const CartPage = () => {
                   </div>
                 </div>
                 {/* delete */}
-                <button className="w-8 h-8 rounded-full hover:bg-red-300 transition-all duration-200 bg-red-100 text-red-500 flex items-center justify-center cursor-pointer">
+                <button onClick={()=>removeFromCart(item)} className="w-8 h-8 rounded-full hover:bg-red-300 transition-all duration-200 bg-red-100 text-red-500 flex items-center justify-center cursor-pointer">
                   <FaTrash className="w-4 h-4" />
                 </button>
               </div>

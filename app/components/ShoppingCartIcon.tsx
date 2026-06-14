@@ -8,7 +8,7 @@ import useCartStore from "../store/cartStore";
 const ShoppingCartIcon = () => {
   const { cart, hasHydrated } = useCartStore();
 
-  if(!hasHydrated) = re
+  if (!hasHydrated) return null;
   return (
     <Link href="/cart" className="relative">
       <BsCart className="w-4 h-4 text-gray-600" />

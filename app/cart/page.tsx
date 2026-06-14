@@ -80,10 +80,10 @@ const CartPage = () => {
   const searchParams = useSearchParams();
   const router = useRouter();
   const [shippingForm, setShippingForm] = useState<ShippingFormInputs>();
-  
+
   const activeStep = parseInt(searchParams.get("step") || "1");
-  
-  const { cart, removeFromCart} = useCartStore();
+
+  const { cart, removeFromCart } = useCartStore();
 
   return (
     <div className="flex flex-col gap-8 items-center justify-center mt-12">
@@ -113,7 +113,10 @@ const CartPage = () => {
         <div className="w-full lg:w-7/12 shadow-lg border border-gray-100 p-8 rounded-md flex flex-col gap-8">
           {activeStep === 1 ? (
             cart.map((item) => (
-              <div className="flex items-center justify-between" key={item.id}>
+              <div
+                className="flex items-center justify-between"
+                key={item.id + item.selectedSize + item.selectedColor}
+              >
                 {/* img and detail */}
                 <div className="flex gap-8">
                   <div className="relative w-32 h-32">
@@ -142,13 +145,16 @@ const CartPage = () => {
                   </div>
                 </div>
                 {/* delete */}
-                <button onClick={()=>removeFromCart(item)} className="w-8 h-8 rounded-full hover:bg-red-300 transition-all duration-200 bg-red-100 text-red-500 flex items-center justify-center cursor-pointer">
+                <button
+                  onClick={() => removeFromCart(item)}
+                  className="w-8 h-8 rounded-full hover:bg-red-300 transition-all duration-200 bg-red-100 text-red-500 flex items-center justify-center cursor-pointer"
+                >
                   <FaTrash className="w-4 h-4" />
                 </button>
               </div>
             ))
           ) : activeStep === 2 ? (
-            <ShippingForm setShippingForm={setShippingForm}/>
+            <ShippingForm setShippingForm={setShippingForm} />
           ) : activeStep === 3 && shippingForm ? (
             <PaymentForm />
           ) : (

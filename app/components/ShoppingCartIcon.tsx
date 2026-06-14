@@ -6,13 +6,14 @@ import { BsCart } from "react-icons/bs";
 import useCartStore from "../store/cartStore";
 
 const ShoppingCartIcon = () => {
+  const { cart, hasHydrated } = useCartStore();
 
-  const {cart} = useCartStore()
+  if(!hasHydrated) = re
   return (
     <Link href="/cart" className="relative">
       <BsCart className="w-4 h-4 text-gray-600" />
       <span className="absolute -top-3 -right-3 bg-amber-400 text-gray-600 rounded-full w-4 h-4 flex items-center justify-center text-xs font-medium">
-        {cart.length}
+        {cart.reduce((acc, item) => acc + item.quantity, 0)}
       </span>
     </Link>
   );

@@ -1,3 +1,4 @@
+import ProductInteraction from "@/app/components/ProductInteraction";
 import { ProductType } from "@/app/types";
 import Image from "next/image";
 import React from "react";
@@ -41,13 +42,19 @@ const ProductPage = async ({
       </div>
       {/* details */}
       <div className="w-full lg:w-7/12 flex flex-col gap-4">
-      <h1 className="text-2xl font-medium">{product.name}</h1>
-      <p className="text-gray-500">{product.description}</p>
-      <h2 className="text-2xl font-semibold">${product.price.toFixed(2)}</h2>
-      interaction
-      <div className="">
-        
-      </div>
+        <h1 className="text-2xl font-medium">{product.name}</h1>
+        <p className="text-gray-500">{product.description}</p>
+        <h2 className="text-2xl font-semibold">${product.price.toFixed(2)}</h2>
+        <ProductInteraction product ={product} selectedSize={selectedSize} selectedColor={selectedColor}/>
+        <div className=""></div>
+        <p className="text-gray-500 text-xs">
+          By clicking Pay Now, you agree to our{" "}
+          <span className="underline hover:text-black">Terms & Conditions</span>{" "}
+          and<span className="underline hover:text-black"> Privace Policy</span>
+          . You authorize us to charge your selected payment method for the
+          totla amount shown. all sales are subject to our return and{" "}
+          <span className="underline hover:text-black">Refund Policies</span>
+        </p>
       </div>
     </div>
   );
